@@ -26,6 +26,9 @@ type FormPostedData = {
   "is_player": boolean,
   "is_scout": boolean,
   "phone": string,
+  "birthdate": Date,
+  "language": number,
+  "auto_update_lang": boolean
 }
 
 const Register: FC = () => {
@@ -33,22 +36,30 @@ const Register: FC = () => {
   const goBack = useNavigationBackAction();
 
   const [currentScreen, setCurrentScreen] = useState<number>(1);
-  const { control, handleSubmit, reset } = useForm<FormPostedData>();
-  // const [role, setRole] = useState<string>('')
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isSubmitSuccessful }
+  } = useForm<FormPostedData>();
 
   const onSubmit = async (data: FormPostedData) => {
 
     const dataModel = {
-      email: data.email,
-      password1: data.password1,
-      password2: data.password1,
-      first_name: data.username,
-      last_name: data.username,
+      username: data?.email,
+      email: data?.email,
+      password1: data?.password1,
+      password2: data?.password1,
+      first_name: data.username?.toString().split(" ")[0],
+      last_name: data.username?.toString().split(" ")[1],
+      is_fan: data?.is_fan,
+      is_scout: data?.is_scout,
+      is_player: data?.is_player,
+      is_trainer: data?.is_trainer,
       phone: data.phone,
-      is_scout: data.is_scout,
-      is_player: data.is_player,
-      is_trainer: data.is_trainer,
-      is_fan: data.is_fan
+      birthdate: new Date().toISOString().slice(0, 10),
+      language: 0,
+      auto_update_lang: true
     }
 
     try {
@@ -56,22 +67,23 @@ const Register: FC = () => {
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(dataModel),
-        headers: {
-          "Content-Type": "application/json"
-        }
+        headers: { "Content-Type": "application/json" }
       });
-
-      console.log('sending below data :');
       const jsonResponse: any = await response.json();
-      console.log(jsonResponse);
-      console.log(dataModel);
-      console.log('przesłano');
-      return jsonResponse;
-    }
-    catch (error) {
+
+      console.log("Response Body -> " + JSON.stringify(jsonResponse, null, 2))
+
+      if (jsonResponse.first_name !== undefined) { setCurrentScreen(1) }
+      if (jsonResponse.last_name !== undefined) { setCurrentScreen(1) }
+      if (jsonResponse.phone !== undefined) { setCurrentScreen(2) }
+      if (jsonResponse.email !== undefined) { setCurrentScreen(3) }
+      if (jsonResponse.password1 !== undefined) { () => setCurrentScreen(4) }
+      if (jsonResponse.detail === "Email weryfikacyjny został wysłany.") { setCurrentScreen(6) }
+
+
+    } catch (error) {
       {
         console.error("Error registering user:", error);
-        console.log(error)
         throw error;
       }
     }
@@ -82,14 +94,6 @@ const Register: FC = () => {
       setCurrentScreen(prevCount => prevCount + 1)
       : null
   }
-
-
-  // const options: { type: string, option: string }[] = [
-  //   { type: 'trener', option: "is_trainer" },
-  //   { type: 'zawodnik', option: "is_player" },
-  //   { type: 'kibic', option: "is_fan" },
-  //   { type: 'obserwator', option: "is_scout" },
-  // ];
 
   return (
     <CSafeAreaView >
@@ -117,30 +121,30 @@ const Register: FC = () => {
 
           <View>
             <TouchableOpacity
-               onPress={handleSubmit((data) => {
+              onPress={handleSubmit((data) => {
                 onSubmit({ ...data, is_trainer: true })
-                setCurrentScreen(6)
+                // setCurrentScreen(6)
               })}>
               <Text>TRENER</Text>
             </TouchableOpacity>
             <TouchableOpacity
-               onPress={handleSubmit((data) => {
+              onPress={handleSubmit((data) => {
                 onSubmit({ ...data, is_player: true })
-                setCurrentScreen(6)
+                // setCurrentScreen(6)
               })}>
               <Text>ZAWODNIK</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={handleSubmit((data) => {
                 onSubmit({ ...data, is_fan: true })
-                setCurrentScreen(6)
+                // setCurrentScreen(6)
               })}>
               <Text>FAN</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={handleSubmit((data) => {
                 onSubmit({ ...data, is_scout: true })
-                setCurrentScreen(6)
+                // setCurrentScreen(6)
               })}>
               <Text>OBSERWATOR</Text>
             </TouchableOpacity>
