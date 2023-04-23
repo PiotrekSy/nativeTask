@@ -29,18 +29,21 @@ const Register: FC = () => {
   const [currentScreen, setCurrentScreen] = useState<number>(1);
   const { control, handleSubmit, reset } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
+    console.log('sending Data in format');
     console.log(data);
-    // reset({
-    //   name: "",
-    //   phone: "",
-    //   email: "",
-    //   password: "",
-    //   accountType: "",
-    // })
-  };
 
-
+    const url = "https://api.dev.footballchallengeapp.com/auth/registration/";
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const jsonResponse = await response.json();
+    return jsonResponse;
+  }
 
   const currentScreenHandler = () => {
     currentScreen !== 5 ?
