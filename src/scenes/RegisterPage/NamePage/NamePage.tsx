@@ -14,16 +14,15 @@ const NamePage = ({ currentScreenHandler, control }: NamePageProps,) => {
             <Text>Imię i nazwisko</Text>
             <Controller
                 control={control}
-                // rules={{ required: false }}
                 render={({ field: { onChange, onBlur, value } }) => (
                     <TextInput
-                        placeholder="Imię:"
+                        placeholder="Imię i nazwisko oddzielone spacją"
                         onBlur={onBlur}
                         onChangeText={onChange}
                         value={value}
                     />
                 )}
-                name="name" />
+                name="username" />
             <Button title="Dalej" onPress={currentScreenHandler} />
         </View>
     )

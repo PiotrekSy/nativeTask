@@ -7,7 +7,6 @@ type PasswordPageProps = {
     control: any;
 };
 
-
 const PasswordPage = ({ currentScreenHandler, control }: PasswordPageProps,) => {
 
     return (
@@ -26,7 +25,7 @@ const PasswordPage = ({ currentScreenHandler, control }: PasswordPageProps,) => 
                         value={value}
                     />
                 )}
-                name="password"
+                name="password1"
             />
             <Button title="Dalej" onPress={currentScreenHandler} />
         </View>
