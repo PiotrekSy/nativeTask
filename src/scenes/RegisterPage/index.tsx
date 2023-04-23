@@ -1,217 +1,97 @@
-import CSafeAreaView from '@components/CSafeAreaView';
-import { useNavigationBackAction } from '@hooks/useNavigationBack';
-import { Flex, Icon, Pressable } from 'native-base';
-import { Text, View, TextInput, Button, Alert, StyleSheet } from "react-native";
 import * as React from 'react';
+import CSafeAreaView from '@components/CSafeAreaView';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, } from "react-hook-form";
+import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { useNavigationBackAction } from '@hooks/useNavigationBack';
+import Banner from './Banner/Banner';
+import NamePage from './NamePage/NamePage';
+import EmailPage from './EmailPage/EmailPage';
+import PhonePage from './PhonePage/PhonePage';
+import PasswordPage from './PasswordPage/PasswordPage';
+import NavComponent from './NavComponent/NavComponent';
+import TermsOfService from './TermsOfService/TermsOfService';
+import AccountType from './AccountType/AccountType';
+
+type FormData = {
+  name: string;
+  phone: string;
+  email: string;
+  password: string;
+  accountType: string;
+};
 
 const Register: FC = () => {
   const { t } = useTranslation();
-  // const { setOptions } = useNavigation<GenericNavigationProps>();
   const goBack = useNavigationBackAction();
 
-  type FormData = {
-    name: string;
-    phone: string;
-    email: string;
-    password: string;
-    accountType: string;
+  const [currentScreen, setCurrentScreen] = useState<number>(1);
+  const { control, handleSubmit, reset } = useForm<FormData>();
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+    // reset({
+    //   name: "",
+    //   phone: "",
+    //   email: "",
+    //   password: "",
+    //   accountType: "",
+    // })
   };
 
-  const { control, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
 
-  const onSubmit = (data: Object) => {
-    setCurrentScreen(1)
-    console.log(data);
-    reset({
-      name: "",
-      phone: "",
-      email: "",
-      password: "",
-      accountType: "",
-    })
-  }
-  const [currentScreen, setCurrentScreen] = useState(1)
 
   const currentScreenHandler = () => {
-    currentScreen !== 5 ? setCurrentScreen(currentScreen + 1) : console.log('zarejestrowano')
+    currentScreen !== 5 ?
+      setCurrentScreen(prevCount => prevCount + 1)
+      : null
   }
+
+  const options = ['trener', 'zawodnik', 'kibic', 'obserwator']
 
   return (
     <CSafeAreaView >
-
-
-
-      {/* NAWIGACJA Z TYTULEM */}
-      <View>
-        <Pressable onPress={goBack} style={styles.navigationElement}>
-          <Text > BACK </Text >
-        </Pressable>
-        <Text>FC APP</Text>
-      </View>
-
-
-      {/* TWORZENIE KONTA */}
-      <View >
-        <Text > Utwórz konto </Text >
-      </View>
-
-
-      {/* IMIE I NAZWISKO */}
-      <View>
-        <Text>Imię i nazwisko</Text>
-        <Text>{currentScreen}</Text>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              placeholder="Imię:"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-          name="name"
-        />
-        {errors.name && <Text >This is required.</Text>}
-        <Button title="Dalej" onPress={currentScreenHandler} />
-      </View>
-
-
-      {/* TELEFON */}
-      <View>
-        <Text>Telefon</Text>
-        <Controller
-          control={control}
-          rules={{
-            maxLength: 100,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-
-            <TextInput
-              placeholder="Wpisz numer telefonu"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-          name="phone"
-        />
-        {errors.phone && <Text >This is required.</Text>}
-        <Button title="Dalej" onPress={currentScreenHandler} />
-      </View>
-
-
-
-      {/* EMAIL  */}
-      <View>
-        <Text>Email</Text>
-        <Controller
-          control={control}
-          rules={{
-            maxLength: 100,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-
-            <TextInput
-              placeholder="Nazwisko"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-          name="email"
-        />
-        {errors.email && <Text >This is required.</Text>}
-        <Button title="Dalej" onPress={currentScreenHandler} />
-      </View>
-
-
-      {/* HASŁO */}
-      <View>
-        <Text>Password</Text>
-        <Controller
-          control={control}
-          rules={{
-            maxLength: 100,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              placeholder="Podaj hasło"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-          name="password"
-        />
-        {errors.password && <Text >This is required.</Text>}
-        <Button title="Dalej" onPress={currentScreenHandler} />
-      </View>
-
-
-      {/* HASŁO */}
-      <View>
-        <Text>Wybierz rodzaj konta</Text>
-        <Text>Wybierz rodzaj swojego konta. W późniejszym etapie będzie moliwośzmiany lub dodania innych typów konta.</Text>
-        <Controller
-          name="types"
-          control={control}
-          rules={{
-            maxLength: 100,
-          }}
-          render={({ field: { onBlur, value } }) => (
-            <View>
-              <Pressable onPress={onSubmit} onBlur={onBlur} >
-                <View  >
-                  <Text>Trener</Text>
-                </View>
-              </Pressable>
-              <View>
-                <Pressable onPress={onSubmit} onBlur={onBlur} >
-                  <View  >
-                    <Text>Zawodnik</Text>
-                  </View>
-                </Pressable>
-              </View>
-              <View>
-                <Pressable onPress={onSubmit} onBlur={onBlur} >
-                  <View  >
-                    <Text>Kibic</Text>
-                  </View>
-                </Pressable>
-              </View>
-              <View>
-                <Pressable onPress={onSubmit} onBlur={onBlur} >
-                  <View  >
-                    <Text >Organizator</Text>
-                  </View>
-                </Pressable>
-              </View>
-            </View>
-          )}
-        />
-
-        <Text>Wybierz rodzaj swojego konta. W późniejszym etapie będzie moliwośzmiany lub dodania innych typów konta.</Text>
-        <Text>Terms of use</Text>
-
-      </View>
-
-
-
-
+      <NavComponent goBack={goBack} />
+      <Text>page : {currentScreen}</Text>
+      <Banner />
+      {currentScreen === 1 && <NamePage
+        currentScreenHandler={currentScreenHandler}
+        control={control} />}
+      {currentScreen === 2 && <PhonePage
+        currentScreenHandler={currentScreenHandler}
+        control={control} />}
+      {currentScreen === 3 && <EmailPage
+        currentScreenHandler={currentScreenHandler}
+        control={control} />}
+      {currentScreen === 4 && <PasswordPage
+        currentScreenHandler={currentScreenHandler}
+        control={control} />}
+      {currentScreen === 5 &&
+        <View>
+          <Text>Wybierz rodzaj konta</Text>
+          <Text>
+            Wybierz rodzaj swojego konta. W późniejszym etapie będzie moliwośc zmiany lub dodania innych typów konta.
+          </Text>
+          {options.map((item, index) =>
+            <TouchableOpacity
+              key={index}
+              onPress={(
+                handleSubmit((data) => {
+                  onSubmit({ ...data, accountType: item }),
+                    setCurrentScreen(6)
+                }))}>
+              <Text>{item}</Text>
+              <Text>asdasdasdadadasdasd</Text>
+              <Text>IMAGE</Text>
+            </TouchableOpacity>)}
+        </View>}
+      <TermsOfService />
     </CSafeAreaView >
   );
 };
 
 const styles = StyleSheet.create({
-
   navigationElement: {
     marginTop: 40,
     color: 'red'

@@ -10,25 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 const Login: FC = () => {
   const { t } = useTranslation();
-  const { setOptions } = useNavigation<GenericNavigationProps>();
   const goBack = useNavigationBackAction();
-
-  // useLayoutEffect(() => {
-  //   setOptions({
-  //     headerLeft: () => (
-  //       <Flex flex={1} justifyContent="center" backgroundColor='red' >
-  //         <Pressable onPress={goBack}>
-  //           <Icon as={MaterialIcons} name="arrow-back-ios" color="MIDNIGHT_BLUE" size="24px" />
-  //         </Pressable>
-  //       </Flex>
-  //     ),
-  //     headerTitle: () => (
-  //       <Text fontSize="20px" fontFamily="body" fontWeight={700} >
-  //         {t('Login:Login')}
-  //       </Text>
-  //     ),
-  //   });
-  // }, [goBack, setOptions, t]);
 
   return (
     <CSafeAreaView >
@@ -37,6 +19,10 @@ const Login: FC = () => {
           <Text > BACK </Text >
         </Pressable>
         <Text>Login</Text>
+      </View>
+      <View>
+        <Text></Text>
+
       </View>
     </CSafeAreaView>
   );
