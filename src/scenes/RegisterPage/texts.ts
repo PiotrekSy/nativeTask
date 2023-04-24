@@ -5,5 +5,5 @@ export const texts = {
     scout: "Obserwator",
     player: "Zawodnik",
     trainer: "Trener",
-    pageCount: "/4",
+    pageCount: "4",
 }

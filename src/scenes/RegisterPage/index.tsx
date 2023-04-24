@@ -92,7 +92,7 @@ const Register: FC = () => {
       {currentScreen === 5 && <>
         <Text >{texts.accType}</Text>
         <Text>{texts.accInfo}</Text>
-        <View style={styles.cardsContainer}>
+        <View >
           <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_trainer: true }))}>
             <Text>{texts.trainer}</Text>
           </TouchableOpacity>
@@ -105,9 +105,10 @@ const Register: FC = () => {
           <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_scout: true }))}>
             <Text>{texts.scout}</Text>
           </TouchableOpacity>
-        </View> </>}
+        </View>
+      </>}
       {currentScreen === 6 && <RegisteredConfirmationPage succesMsgId={succesMsgId} succesMsg={succesMsg} />}
-      {currentScreen < 5 && <Text>{currentScreen}{texts.pageCount}</Text>}
+      {currentScreen < 5 && <Text>{currentScreen}/{texts.pageCount}</Text>}
       <TermsOfService />
     </CSafeAreaView >
   );

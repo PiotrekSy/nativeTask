@@ -6,5 +6,5 @@ export const styles = StyleSheet.create({
   },
   cardsContainer: {
     backgroundColor: 'red',
-  }
+  },
 });

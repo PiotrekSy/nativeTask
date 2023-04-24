@@ -1,5 +1,5 @@
 export const texts = {
     title: "Email: ",
-    placeholder: "Podaj swojego emaila",
+    placeholder: "Podaj swój email",
     forwards: "Dalej",
 }
