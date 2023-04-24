@@ -75,9 +75,6 @@
       "@hooks/*": [
         "src/hooks/*"
       ],
-      "@i18n/*": [
-        "src/i18n/*"
-      ],
       "@routes/*": [
         "src/routes/*"
       ],

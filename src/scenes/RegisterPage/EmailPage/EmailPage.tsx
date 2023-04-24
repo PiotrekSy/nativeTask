@@ -1,6 +1,6 @@
 import React from 'react';
 import { texts } from './texts';
-import { styles } from './EmailPage.style';
+import { styles } from './EmailPage.styles';
 import { Controller } from 'react-hook-form';
 import { EmailPageProps } from '../types/types';
 import { currentScreenHandler } from '../utils/utils';

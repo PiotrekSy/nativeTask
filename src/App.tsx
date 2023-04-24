@@ -1,5 +1,4 @@
 import Splashscreen from '@components/Splashscreen';
-import '@i18n';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStackScreen } from '@routes';
 import { isMountedRef, navigationRef } from '@routes/navigationUtils';

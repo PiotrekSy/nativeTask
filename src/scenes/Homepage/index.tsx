@@ -1,14 +1,14 @@
-import CSafeAreaView from '@components/CSafeAreaView';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
-import { Button, Flex, Icon, ScrollView } from 'native-base';
-import { StyleSheet, Text, View } from 'react-native';
+import { texts } from './texts';
+import { styles } from './index.style';
 import React, { FC, memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
+import { GenericNavigationProps } from '@routes/types';
+import { useNavigation } from '@react-navigation/native';
+import { Button, Flex, Icon, ScrollView } from 'native-base';
+import CSafeAreaView from '@components/CSafeAreaView';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 const Home: FC = () => {
-  const [t] = useTranslation();
   const navigation = useNavigation<GenericNavigationProps>();
 
   return (
@@ -21,14 +21,12 @@ const Home: FC = () => {
           <Text >Witaj w football challenge!</Text>
         </View>
         <View>
-          <Text >MASZ JUŻ KONTO?</Text>
+          <Text >{texts.gotAcc}</Text>
           <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
             <Flex flexDirection="row" alignItems="center">
               <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
               <View style={styles.buttonText}>
-                <Text >
-                  {t('Homepage:loginIn')}
-                </Text>
+                <Text>Log In</Text>
               </View>
             </Flex>
           </Button>
@@ -38,7 +36,7 @@ const Home: FC = () => {
               <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
               <View style={styles.buttonText}>
                 <Text >
-                  {t('Homepage:googleLogin')}
+                  Zaloguj za pomocą google
                 </Text>
               </View>
             </Flex>
@@ -48,7 +46,8 @@ const Home: FC = () => {
             <Flex flexDirection="row" alignItems="center">
               <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
               <Text >
-                {t('Homepage:facebookLogin')}
+                Zaloguj za pomocą facebooka
+
               </Text>
             </Flex>
           </Button>
@@ -57,7 +56,7 @@ const Home: FC = () => {
             <Flex flexDirection="row" alignItems="center">
               <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
               <Text >
-                {t('Homepage:appleLogin')}
+                Zaloguj za appleId
               </Text>
             </Flex>
           </Button>
@@ -68,37 +67,13 @@ const Home: FC = () => {
             mb="5px">
             <Flex flexDirection="row" alignItems="center">
               <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <Text >
-                {t('Homepage:emailSignUp')}
-              </Text>
+              <Text >Zarejestruj za Emaila</Text>
             </Flex>
           </Button>
-          {/* <EnvInfoView /> */}
         </View>
       </ScrollView >
     </CSafeAreaView >
   );
 };
-
-const styles = StyleSheet.create({
-  fullPage: {
-    flex: 0.5,
-    flexGrow: 1,
-    padding: 15,
-  },
-  titleText: {
-    color: "red",
-
-    fontStyle: "normal",
-    paddingBottom: 20,
-    textAlign: "center",
-  },
-  buttonText: {
-    color: 'red',
-    fontWeight: 900,
-    paddingBottom: 20,
-    textAlign: "center",
-  },
-})
 
 export default memo(Home);

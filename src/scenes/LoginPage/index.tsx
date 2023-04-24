@@ -6,10 +6,8 @@ import { View, Flex, Icon, Pressable, Text } from 'native-base';
 import { StyleSheet } from 'react-native';
 import * as React from 'react';
 import { FC, useLayoutEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
 const Login: FC = () => {
-  const { t } = useTranslation();
   const goBack = useNavigationBackAction();
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { texts } from './texts';
-import { styles } from './NamePage.style';
+import { styles } from './NamePage.styles';
 import { Controller } from 'react-hook-form';
 import { NamePageProps } from '../types/types';
 import { View, Text, TextInput, Button } from 'react-native';
