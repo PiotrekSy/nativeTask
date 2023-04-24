@@ -1,6 +1,6 @@
 import React from 'react';
 import { texts } from './texts';
-import { styles } from './Banner.styles';
+import { styles } from './Banner.style/';
 import { View, Text } from 'react-native';
 
 const Banner = () => {
