@@ -4,7 +4,7 @@ import { styles } from './NamePage.styles';
 import { Controller } from 'react-hook-form';
 import { NamePageProps } from '../types/types';
 import { View, Text, TextInput, Button } from 'react-native';
-import { currentScreenHandler } from '../Functions/functions';
+import { currentScreenHandler } from '../utils/utils';
 
 const NamePage = ({ currentScreen, setCurrentScreen, control, nameError }: NamePageProps,) => {
 

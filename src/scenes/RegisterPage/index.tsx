@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { FormPostedData } from './types/types';
-import { defaultObject } from './Functions/functions';
+import { defaultObject } from './utils/utils';
 import { Text, View, TouchableOpacity } from "react-native";
 import { useNavigationBackAction } from '@hooks/useNavigationBack';
 import * as React from 'react';

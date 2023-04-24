@@ -42,3 +42,8 @@ export type PasswordPageProps = {
   control: any;
   passwordError: string
 };
+
+export type NavProps = {
+  goBack: () => void;
+};
+

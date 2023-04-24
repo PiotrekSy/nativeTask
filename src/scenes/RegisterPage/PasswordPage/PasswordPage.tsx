@@ -4,7 +4,7 @@ import { styles } from './PasswordPages.styles';
 import { Controller } from 'react-hook-form';
 import { PasswordPageProps } from '../types/types';
 import { View, Text, TextInput, Button } from 'react-native';
-import { currentScreenHandler } from '../Functions/functions';
+import { currentScreenHandler } from '../utils/utils';
 
 const PasswordPage = ({ currentScreen, setCurrentScreen, control, passwordError }: PasswordPageProps,) => {
 

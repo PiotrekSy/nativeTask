@@ -2,7 +2,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import { PhonePageProps } from '../types/types';
 import { View, Text, TextInput, Button } from 'react-native';
-import { currentScreenHandler } from '../Functions/functions';
+import { currentScreenHandler } from '../utils/utils';
 
 const PhonePage = ({ currentScreen, setCurrentScreen, control, phoneError }: PhonePageProps) => {
 
