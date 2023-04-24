@@ -1,22 +1,17 @@
 import React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
 import { Controller } from 'react-hook-form';
+import { PhonePageProps } from '../types/types';
+import { View, Text, TextInput, Button } from 'react-native';
+import { currentScreenHandler } from '../Functions/functions';
 
-type PhonePageProps = {
-    currentScreenHandler: () => void;
-    control: any;
-};
-
-const PhonePage = ({ currentScreenHandler, control }: PhonePageProps) => {
+const PhonePage = ({ currentScreen, setCurrentScreen, control, phoneError }: PhonePageProps) => {
 
     return (
         <View>
+            <Text>{phoneError}</Text>
             <Text>Telefon</Text>
             <Controller
                 control={control}
-                rules={{
-                    maxLength: 100,
-                }}
                 render={({ field: { onChange, onBlur, value } }) => (
                     <TextInput
                         placeholder="Wpisz swój numer telefonu"
@@ -27,7 +22,7 @@ const PhonePage = ({ currentScreenHandler, control }: PhonePageProps) => {
                 )}
                 name="phone"
             />
-            <Button title="Dalej" onPress={currentScreenHandler} />
+            <Button title="Dalej" onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })} />
         </View>
     )
 }

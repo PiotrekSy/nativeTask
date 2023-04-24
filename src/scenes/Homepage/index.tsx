@@ -1,11 +1,9 @@
-import { useCreateUser, useDeleteUser, useModifyUser } from '@api/hooks/useUser';
-import EnvInfoView from '@components/AppVersion';
 import CSafeAreaView from '@components/CSafeAreaView';
 import { useNavigation } from '@react-navigation/native';
 import { GenericNavigationProps } from '@routes/types';
 import { Button, Flex, Icon, ScrollView } from 'native-base';
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useCallback, FC, memo, useLayoutEffect } from 'react';
+import React, { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
@@ -90,19 +88,14 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: "red",
-    // fontFamily: "body",
-    // fontWeight: 700,
+
     fontStyle: "normal",
-    // fontSize: "3xl",
     paddingBottom: 20,
     textAlign: "center",
   },
   buttonText: {
     color: 'red',
-    // fontFamily: "body",
     fontWeight: 900,
-    // fontStyle: "normal",
-    // fontSize: "3xl",
     paddingBottom: 20,
     textAlign: "center",
   },

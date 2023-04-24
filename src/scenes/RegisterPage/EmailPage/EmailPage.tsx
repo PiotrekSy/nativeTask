@@ -1,24 +1,18 @@
 import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { Controller } from 'react-hook-form';
+import { currentScreenHandler } from '../Functions/functions';
+import { EmailPageProps } from '../types/types';
 
-type EmailPageProps = {
-    currentScreenHandler: () => void;
-    control: any;
-};
-
-const EmailPage = ({ currentScreenHandler, control }: EmailPageProps,) => {
+const EmailPage = ({ currentScreen, setCurrentScreen, control, emailError }: EmailPageProps,) => {
 
     return (
         <View>
+            <Text>{emailError}</Text>
             <Text>Email</Text>
             <Controller
                 control={control}
-                rules={{
-                    maxLength: 100,
-                }}
                 render={({ field: { onChange, onBlur, value } }) => (
-
                     <TextInput
                         placeholder="Wpisz swój email"
                         onBlur={onBlur}
@@ -28,8 +22,7 @@ const EmailPage = ({ currentScreenHandler, control }: EmailPageProps,) => {
                 )}
                 name="email"
             />
-            {/* {errors.email && <Text >This is required.</Text>} */}
-            <Button title="Dalej" onPress={currentScreenHandler} />
+            <Button title="Dalej" onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })} />
         </View>
     )
 }
