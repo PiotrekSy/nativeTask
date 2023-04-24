@@ -1,3 +1,3 @@
 export const texts = {
-    banner: "Utwórz konto"
+    banner: "Utwórz konto",
 }

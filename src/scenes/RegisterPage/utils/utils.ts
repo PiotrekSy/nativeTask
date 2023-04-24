@@ -17,10 +17,7 @@ export const defaultObject = {
 }
 
 export const currentScreenHandler = ({
-    currentScreen,
-    setCurrentScreen }: {
-        currentScreen: number,
-        setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
-    }) => {
-    currentScreen !== 5 ? setCurrentScreen(prevState => prevState + 1) : null
-}
+    currentScreen, setCurrentScreen
+}: {
+    currentScreen: number, setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
+}) => { currentScreen !== 5 ? setCurrentScreen(prevState => prevState + 1) : null }

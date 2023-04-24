@@ -6,7 +6,7 @@ import { View, Text } from 'react-native';
 const Banner = () => {
     return (
         <View >
-            <Text style={styles.container}>{texts.banner}</Text >
+            <Text style={styles.text}>{texts.banner}</Text >
         </View>
     )
 }

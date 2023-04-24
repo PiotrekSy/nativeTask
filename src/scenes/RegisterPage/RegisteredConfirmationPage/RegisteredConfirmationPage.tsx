@@ -1,21 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-
-
-type RegisteredConfirmationPageProps = {
-    succesMsgId: string,
-    succesMsg: string
-}
+import { RegisteredConfirmationPageProps } from '../types/types'
 
 const RegisteredConfirmationPage = ({ succesMsgId, succesMsg }: RegisteredConfirmationPageProps) => {
     return (
         <View>
-            <Text>
-                {succesMsg}
-            </Text>
-            <Text>
-                {succesMsgId}
-            </Text>
+            <Text>{succesMsg}</Text>
+            <Text>{succesMsgId}</Text>
         </View>
     )
 }

@@ -47,3 +47,7 @@ export type NavProps = {
   goBack: () => void;
 };
 
+export type RegisteredConfirmationPageProps = {
+  succesMsgId: string,
+  succesMsg: string,
+};

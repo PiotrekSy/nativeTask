@@ -21,7 +21,7 @@ const Home: FC = () => {
           <Text >Witaj w football challenge!</Text>
         </View>
         <View>
-          <Text >{texts.gotAcc}</Text>
+          <Text>{texts.gotAcc}</Text>
           <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
             <Flex flexDirection="row" alignItems="center">
               <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />

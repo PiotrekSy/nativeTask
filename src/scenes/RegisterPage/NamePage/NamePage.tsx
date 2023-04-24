@@ -16,8 +16,7 @@ const NamePage = ({ currentScreen, setCurrentScreen, control, nameError }: NameP
                 control={control}
                 name="username"
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                    placeholder={texts.placeholder}
+                    <TextInput placeholder={texts.placeholder}
                         onBlur={onBlur}
                         onChangeText={onChange}
                         value={value} />)} />
