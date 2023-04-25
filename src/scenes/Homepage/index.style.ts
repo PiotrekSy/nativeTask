@@ -10,14 +10,14 @@ export const styles = StyleSheet.create({
         shadowRadius: 3,
         elevation: 3,
         zIndex: 2,
-        borderRadius: 50,
+        borderRadius: 40,
         backgroundColor: '#241F44',
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
     buttonsList: {
         width: '100%',
-        borderWidth: 1,
+        // borderWidth: 1,
         display: 'flex',
         alignItems: 'center'
     },

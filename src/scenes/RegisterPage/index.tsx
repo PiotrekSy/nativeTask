@@ -2,9 +2,11 @@ import { texts } from './texts';
 import { FC, useState } from 'react';
 import { styles } from './index.styles';
 import { useForm } from "react-hook-form";
-import { FormPostedData } from './types/types';
 import { defaultObject } from './utils/utils';
-import { Text, View, TouchableOpacity } from "react-native";
+import { FormPostedData } from './types/types';
+import { currentScreenHandler } from './utils/utils';
+import { Image, KeyboardAvoidingView } from 'native-base';
+import { Text, View, TouchableOpacity, Button } from "react-native";
 import { useNavigationBackAction } from '@hooks/useNavigationBack';
 import * as React from 'react';
 import Banner from './Banner/Banner';
@@ -78,39 +80,51 @@ const Register: FC = () => {
     }
   }
 
+
   return (
     <CSafeAreaView >
-      <NavComponent goBack={goBack} />
-      <Banner />
-      {currentScreen === 1 && <NamePage nameError={nameError} currentScreen={currentScreen}
-        setCurrentScreen={setCurrentScreen} control={control} />}
-      {currentScreen === 2 && <PhonePage phoneError={phoneError} currentScreen={currentScreen}
-        setCurrentScreen={setCurrentScreen} control={control} />}
-      {currentScreen === 3 && <EmailPage emailError={emailError} currentScreen={currentScreen}
-        setCurrentScreen={setCurrentScreen} control={control} />}
-      {currentScreen === 4 && <PasswordPage passwordError={passwordError} currentScreen={currentScreen}
-        setCurrentScreen={setCurrentScreen} control={control} />}
-      {currentScreen === 5 && <>
-        <Text >{texts.accType}</Text>
-        <Text>{texts.accInfo}</Text>
-        <View >
-          <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_trainer: true }))}>
-            <Text>{texts.trainer}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_player: true }))}>
-            <Text>{texts.player}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_fan: true }))}>
-            <Text>{texts.fan}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_scout: true }))}>
-            <Text>{texts.scout}</Text>
-          </TouchableOpacity>
-        </View>
-      </>}
-      {currentScreen === 6 && <RegisteredConfirmationPage succesMsgId={succesMsgId} succesMsg={succesMsg} />}
-      {currentScreen < 5 && <Text>{currentScreen}/{texts.pageCount}</Text>}
-      <TermsOfService />
+      <Image style={styles.image} source={require('./../../assets/images/Background_img.png')} />
+      <View style={styles.content}>
+        <NavComponent goBack={goBack} />
+        <KeyboardAvoidingView behavior='padding'>
+          <View style={styles.card}>
+            <Banner />
+            {currentScreen === 1 && <NamePage nameError={nameError} currentScreen={currentScreen}
+              setCurrentScreen={setCurrentScreen} control={control} />}
+            {currentScreen === 2 && <PhonePage phoneError={phoneError} currentScreen={currentScreen}
+              setCurrentScreen={setCurrentScreen} control={control} />}
+            {currentScreen === 3 && <EmailPage emailError={emailError} currentScreen={currentScreen}
+              setCurrentScreen={setCurrentScreen} control={control} />}
+            {currentScreen === 4 && <PasswordPage passwordError={passwordError} currentScreen={currentScreen}
+              setCurrentScreen={setCurrentScreen} control={control} />}
+            {currentScreen === 5 && <>
+              <Text >{texts.accType}</Text>
+              <Text>{texts.accInfo}</Text>
+              <View >
+                <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_trainer: true }))}>
+                  <Text>{texts.trainer}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_player: true }))}>
+                  <Text>{texts.player}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_fan: true }))}>
+                  <Text>{texts.fan}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_scout: true }))}>
+                  <Text>{texts.scout}</Text>
+                </TouchableOpacity>
+                <TermsOfService />
+              </View>
+            </>}
+            {currentScreen === 6 && <RegisteredConfirmationPage succesMsgId={succesMsgId} succesMsg={succesMsg} />}
+            <View>
+              <Text>{texts.step}</Text>
+              {currentScreen < 5 && <Text>{currentScreen}/{texts.pageCount}</Text>}
+            </View>
+            <Button title={texts.next} onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })} />
+          </View>
+        </KeyboardAvoidingView>
+      </View>
     </CSafeAreaView >
   );
 }

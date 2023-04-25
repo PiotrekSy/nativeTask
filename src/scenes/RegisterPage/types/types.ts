@@ -16,29 +16,21 @@ export type FormPostedData = {
 };
 
 export type PhonePageProps = {
-  currentScreen: number,
-  setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
   control: any;
   phoneError: string;
 };
 
 export type NamePageProps = {
-  currentScreen: number,
-  setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
   control: any;
   nameError: string;
 };
 
 export type EmailPageProps = {
-  currentScreen: number,
-  setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
   control: any;
   emailError: string
 };
 
 export type PasswordPageProps = {
-  currentScreen: number,
-  setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
   control: any;
   passwordError: string
 };

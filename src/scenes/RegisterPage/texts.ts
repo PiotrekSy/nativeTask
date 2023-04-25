@@ -6,4 +6,6 @@ export const texts = {
     player: "Zawodnik",
     trainer: "Trener",
     pageCount: "4",
+    step: "Krok",
+    next: "Dalej"
 }

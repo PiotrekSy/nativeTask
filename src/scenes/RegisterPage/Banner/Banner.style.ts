@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     banner: {
-        color: 'red',
+        fontSize: 17,
+        color: '#EDEDED',
+        fontWeight: '700',
+        margin: 40,
     },
 });

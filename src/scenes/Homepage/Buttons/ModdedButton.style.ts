@@ -27,7 +27,6 @@ const getStyles = ({ mode }: ModeType) => {
             opacity: mode === "outlined" ? 0.7 : 1,
         },
         image: {
-
             position: 'absolute',
             left: 10,
             height: 40,
