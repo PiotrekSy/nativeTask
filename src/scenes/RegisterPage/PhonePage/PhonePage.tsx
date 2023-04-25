@@ -20,6 +20,7 @@ const PhonePage = ({ control, phoneError }: PhonePageProps) => {
                     <TextInput
                         style={styles.input}
                         placeholder={texts.placeholder}
+                        placeholderTextColor={'rgba(237, 237, 237, 0.7)'}
                         onBlur={onBlur}
                         onChangeText={onChange}
                         value={value} />

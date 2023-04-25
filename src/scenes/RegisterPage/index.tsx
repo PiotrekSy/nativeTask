@@ -1,13 +1,13 @@
 import { texts } from './texts';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { styles } from './index.styles';
 import { SvgXml } from 'react-native-svg';
 import { useForm } from "react-hook-form";
 import { defaultObject } from './utils/utils';
 import { FormPostedData } from './types/types';
 import { currentScreenHandler } from './utils/utils';
-import { Image, KeyboardAvoidingView, Button } from 'native-base';
-import { Text, View, TouchableOpacity, } from "react-native";
+import { Image, KeyboardAvoidingView, } from 'native-base';
+import { Text, View, TouchableOpacity, Keyboard, KeyboardEvent } from "react-native";
 import { backgroundLogoXml } from './../../assets/images/BackgroundLogo';
 import * as React from 'react';
 import Banner from './Banner/Banner';
@@ -22,6 +22,7 @@ import RegisteredConfirmationPage from './RegisteredConfirmationPage/RegisteredC
 
 const Register: FC = () => {
 
+
   const [succesMsg, setSuccesMsg] = useState<string>('');
   const [nameError, setNameError] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
@@ -31,8 +32,8 @@ const Register: FC = () => {
   const [currentScreen, setCurrentScreen] = useState<number>(1);
   const { control, handleSubmit, reset } = useForm<FormPostedData>();
 
-  const onSubmit = async (data: FormPostedData) => {
 
+  const onSubmit = async (data: FormPostedData) => {
     const dataModel = {
       username: data?.email,
       email: data?.email,
@@ -81,10 +82,10 @@ const Register: FC = () => {
   }
 
   return (
-    <CSafeAreaView >
+    <CSafeAreaView>
       <Image style={styles.image} source={require('./../../assets/images/Background_img.png')} alt={"backgroundImg"} />
       <View style={styles.content}>
-        <NavComponent />
+        <NavComponent currentScreen={currentScreen} setCurrentScreen={setCurrentScreen} />
         <KeyboardAvoidingView behavior='padding'>
           <View style={styles.card}>
             {currentScreen < 5 && <Banner />}
@@ -145,20 +146,18 @@ const Register: FC = () => {
                 </View>
               </View>}
             {currentScreen === 6 && <RegisteredConfirmationPage succesMsgId={succesMsgId} succesMsg={succesMsg} />}
-            {currentScreen < 5 &&
-              <>
-                <View style={styles.statusBar}>
-                  <Text style={styles.counterText}>{texts.step}</Text>
-                  <Text style={styles.counter}>{currentScreen}/{texts.pageCount}</Text>
-                </View>
-                <View style={styles.progressBarBack}>
-                  <View style={[styles.progressBarFront, { width: `${currentScreen * 25}%` }]} />
-                </View>
-                <TouchableOpacity style={styles.nextButton} onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })}>
-                  <Text style={styles.nextButtonText}>{texts.next}</Text>
-                </TouchableOpacity>
-              </>
-            }
+            {currentScreen < 5 && <>
+              <View style={styles.statusBar}>
+                <Text style={styles.counterText}>{texts.step}</Text>
+                <Text style={styles.counter}>{currentScreen}/{texts.pageCount}</Text>
+              </View>
+              <View style={styles.progressBarBack}>
+                <View style={[styles.progressBarFront, { width: `${currentScreen * 25}%` }]} />
+              </View>
+              <TouchableOpacity style={styles.nextButton} onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })}>
+                <Text style={styles.nextButtonText}>{texts.next}</Text>
+              </TouchableOpacity>
+            </>}
           </View>
         </KeyboardAvoidingView>
       </View>

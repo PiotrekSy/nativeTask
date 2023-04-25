@@ -1,3 +1,5 @@
+import React, { Dispatch } from "react";
+
 export type FormPostedData = {
   "username": string,
   "email": string,
@@ -27,12 +29,12 @@ export type NamePageProps = {
 
 export type EmailPageProps = {
   control: any;
-  emailError: string
+  emailError: string;
 };
 
 export type PasswordPageProps = {
   control: any;
-  passwordError: string
+  passwordError: string;
 };
 
 export type NavProps = {
@@ -42,4 +44,9 @@ export type NavProps = {
 export type RegisteredConfirmationPageProps = {
   succesMsgId: string,
   succesMsg: string,
+};
+
+export type BackArrowPropTypes = {
+  currentScreen: number,
+  setCurrentScreen: Dispatch<React.SetStateAction<number>>;
 };

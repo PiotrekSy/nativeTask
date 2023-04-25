@@ -149,7 +149,7 @@ export const styles = StyleSheet.create({
     marginBottom: 5
   },
   description: {
-    fontSize: 14,
+    fontSize: 13,
     textAlign: 'left',
     width: '50%',
     color: '#EDEDED',
