@@ -15,16 +15,15 @@ const PasswordPage = ({ control, passwordError }: PasswordPageProps,) => {
             <Controller
                 control={control}
                 name="password1"
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <>
-                        <Icon name="lock" size={24} color="#777" style={styles.icon} />
-                        <TextInput
-                            style={styles.input}
-                            placeholder={texts.placeholder}
-                            onBlur={onBlur}
-                            onChangeText={onChange}
-                            value={value} />
-                    </>)} />
+                render={({ field: { onChange, onBlur, value } }) => (<>
+                    <Icon name="lock" size={24} color="#777" style={styles.icon} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder={texts.placeholder}
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                        value={value} />
+                </>)} />
         </View>)
 }
 

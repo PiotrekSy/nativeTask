@@ -6,9 +6,9 @@ import { styles } from './TermsOfService.styles';
 const TermsOfService = () => {
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.text}>{texts.accInfo}</Text>
-      <Text style={styles.text}>{texts.tos}</Text>
+      <Text style={styles.tos}>{texts.tos}</Text>
     </View>
   )
 }

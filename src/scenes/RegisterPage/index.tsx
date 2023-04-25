@@ -18,6 +18,12 @@ import PasswordPage from './PasswordPage/PasswordPage';
 import NavComponent from './NavComponent/NavComponent';
 import TermsOfService from './TermsOfService/TermsOfService';
 import RegisteredConfirmationPage from './RegisteredConfirmationPage/RegisteredConfirmationPage';
+import { SvgXml } from 'react-native-svg';
+import { backgroundLogoXml } from './../../assets/images/BackgroundLogo';
+// import { playerXml } from '@assets/images/playerImage';
+// import { trainerXml } from '@assets/images/trainerImage';
+// import { fanXml } from '@assets/images/fanImage';
+// import { scoutXml } from '@assets/images/scoutImage';
 
 const Register: FC = () => {
 
@@ -80,48 +86,77 @@ const Register: FC = () => {
     }
   }
 
-
   return (
     <CSafeAreaView >
-      <Image style={styles.image} source={require('./../../assets/images/Background_img.png')} />
+      <Image style={styles.image} source={require('./../../assets/images/Background_img.png')} alt={"backgroundImg"} />
       <View style={styles.content}>
         <NavComponent goBack={goBack} />
         <KeyboardAvoidingView behavior='padding'>
           <View style={styles.card}>
             <Banner />
-            {currentScreen === 1 && <NamePage nameError={nameError} currentScreen={currentScreen}
-              setCurrentScreen={setCurrentScreen} control={control} />}
-            {currentScreen === 2 && <PhonePage phoneError={phoneError} currentScreen={currentScreen}
-              setCurrentScreen={setCurrentScreen} control={control} />}
-            {currentScreen === 3 && <EmailPage emailError={emailError} currentScreen={currentScreen}
-              setCurrentScreen={setCurrentScreen} control={control} />}
-            {currentScreen === 4 && <PasswordPage passwordError={passwordError} currentScreen={currentScreen}
-              setCurrentScreen={setCurrentScreen} control={control} />}
-            {currentScreen === 5 && <>
-              <Text >{texts.accType}</Text>
-              <Text>{texts.accInfo}</Text>
-              <View >
-                <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_trainer: true }))}>
-                  <Text>{texts.trainer}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_player: true }))}>
-                  <Text>{texts.player}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_fan: true }))}>
-                  <Text>{texts.fan}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleSubmit((data) => onSubmit({ ...data, is_scout: true }))}>
-                  <Text>{texts.scout}</Text>
-                </TouchableOpacity>
-                <TermsOfService />
-              </View>
-            </>}
+            {currentScreen === 1 && <NamePage nameError={nameError} control={control} />}
+            {currentScreen === 2 && <PhonePage phoneError={phoneError} control={control} />}
+            {currentScreen === 3 && <EmailPage emailError={emailError} control={control} />}
+            {currentScreen === 4 && <PasswordPage passwordError={passwordError} control={control} />}
+            {currentScreen === 5 &&
+              <View style={styles.form}>
+                <SvgXml xml={backgroundLogoXml} height='100%' width="110%" style={styles.backgroundSignature} />
+                <View style={styles.cardContainer}>
+                  <Text style={styles.banner}>{texts.accType}</Text>
+                  <Text style={styles.text}>{texts.accInfo}</Text>
+                  <TouchableOpacity style={styles.option}
+                    onPress={handleSubmit((data) => onSubmit({ ...data, is_trainer: true }))}>
+                    <View style={styles.optionImage}>
+                      {/* <SvgXml xml={trainerXml} height='110%' width="100%" style={styles.typeSvg} /> */}
+                    </View>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.title}>{texts.trainer}</Text>
+                      <Text style={styles.description}>{texts.trainerDescription}</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.option}
+                    onPress={handleSubmit((data) => onSubmit({ ...data, is_player: true }))}>
+                    <View style={styles.optionImage}>
+                    {/* <SvgXml xml={playerXml} height='110%' width="100%" style={styles.typeSvg} /> */}
+                    </View>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.title}>{texts.player}</Text>
+                      <Text style={styles.description}>{texts.playerDescription}</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.option}
+                    onPress={handleSubmit((data) => onSubmit({ ...data, is_fan: true }))}>
+                    <View style={styles.optionImage}>
+                    {/* <SvgXml xml={fanXml} height='110%' width="100%" style={styles.typeSvg} /> */}
+                    </View>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.title}>{texts.fan}</Text>
+                      <Text style={styles.description}>{texts.fanDescription}</Text></View>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.option}
+                    onPress={handleSubmit((data) => onSubmit({ ...data, is_scout: true }))}>
+                    <View style={styles.optionImage}>
+                    {/* <SvgXml xml={scoutXml} height='110%' width="100%" style={styles.typeSvg} /> */}
+                    </View>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.title}>{texts.scout}</Text>
+                      <Text style={styles.description}>{texts.scoutDescription}</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TermsOfService />
+                </View>
+              </View>}
             {currentScreen === 6 && <RegisteredConfirmationPage succesMsgId={succesMsgId} succesMsg={succesMsg} />}
-            <View>
-              <Text>{texts.step}</Text>
-              {currentScreen < 5 && <Text>{currentScreen}/{texts.pageCount}</Text>}
-            </View>
-            <Button title={texts.next} onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })} />
+            {currentScreen < 5 && <>
+              <View style={styles.statusBar}>
+                <Text style={styles.counterText}>{texts.step}</Text>
+                <Text style={styles.counter}>{currentScreen}/{texts.pageCount}</Text>
+              </View>
+              <View style={styles.progressBarBack}>
+                <View style={{ height: '100%', position: 'absolute', width: `${currentScreen * 25}%`, backgroundColor: '#9386E9' }} />
+              </View>
+              <Button title={texts.next} onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })} />
+            </>}
           </View>
         </KeyboardAvoidingView>
       </View>
