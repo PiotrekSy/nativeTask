@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         left: 20,
         top: 7,
-        width: "100%",
+        width: "10%",
         position: 'absolute',
     },
 });

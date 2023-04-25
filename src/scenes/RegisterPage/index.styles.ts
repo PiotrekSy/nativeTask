@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-
 export const styles = StyleSheet.create({
   image: {
     top: 0,
@@ -16,7 +15,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   card: {
-    minHeight: '50%',
+    minHeight: '60%',
     shadowColor: '#595281',
     shadowTopOffset: { width: 0, height: 3 },
     shadowOpacity: 1,
@@ -52,13 +51,19 @@ export const styles = StyleSheet.create({
     width: '90%',
     backgroundColor: '#302A5B',
   },
+  progressBarFront: {
+    height: '100%',
+    position: 'absolute',
+    backgroundColor: '#9386E9'
+  },
+
   // ACC TYPE FORM STYLES //
   form: {
     overflow: 'hidden',
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    height: '165%',
+    height: '125%',
     shadowColor: '#595281',
     shadowTopOffset: { width: 0, height: 3 },
     shadowOpacity: 1,
@@ -112,7 +117,23 @@ export const styles = StyleSheet.create({
   textContainer: {
     padding: 10,
   },
-  // IMAGE//////////////////////////////////
+  nextButton: {
+    backgroundColor: "#9386E9",
+    borderRadius: 15,
+    height: 50,
+    margin: 20,
+    width: '90%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  nextButtonText: {
+    color: "#EDEDED",
+    textAlign: "center",
+    fontWeight: '700',
+    fontSize: 17
+  },
+
+  // IMAGE
   optionImage: {
     aspectRatio: 1,
     backgroundColor: '#7868E4',
@@ -136,6 +157,8 @@ export const styles = StyleSheet.create({
   typeSvg: {
     position: 'absolute',
     bottom: 0,
+    width: '100%',
+    height: '110%',
   }
 });
 

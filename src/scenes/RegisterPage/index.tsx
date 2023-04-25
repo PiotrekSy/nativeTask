@@ -1,13 +1,14 @@
 import { texts } from './texts';
 import { FC, useState } from 'react';
 import { styles } from './index.styles';
+import { SvgXml } from 'react-native-svg';
 import { useForm } from "react-hook-form";
 import { defaultObject } from './utils/utils';
 import { FormPostedData } from './types/types';
 import { currentScreenHandler } from './utils/utils';
-import { Image, KeyboardAvoidingView } from 'native-base';
-import { Text, View, TouchableOpacity, Button } from "react-native";
-import { useNavigationBackAction } from '@hooks/useNavigationBack';
+import { Image, KeyboardAvoidingView, Button } from 'native-base';
+import { Text, View, TouchableOpacity, } from "react-native";
+import { backgroundLogoXml } from './../../assets/images/BackgroundLogo';
 import * as React from 'react';
 import Banner from './Banner/Banner';
 import NamePage from './NamePage/NamePage';
@@ -18,16 +19,9 @@ import PasswordPage from './PasswordPage/PasswordPage';
 import NavComponent from './NavComponent/NavComponent';
 import TermsOfService from './TermsOfService/TermsOfService';
 import RegisteredConfirmationPage from './RegisteredConfirmationPage/RegisteredConfirmationPage';
-import { SvgXml } from 'react-native-svg';
-import { backgroundLogoXml } from './../../assets/images/BackgroundLogo';
-// import { playerXml } from '@assets/images/playerImage';
-// import { trainerXml } from '@assets/images/trainerImage';
-// import { fanXml } from '@assets/images/fanImage';
-// import { scoutXml } from '@assets/images/scoutImage';
 
 const Register: FC = () => {
 
-  const goBack = useNavigationBackAction();
   const [succesMsg, setSuccesMsg] = useState<string>('');
   const [nameError, setNameError] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
@@ -51,7 +45,7 @@ const Register: FC = () => {
       is_player: data?.is_player,
       is_trainer: data?.is_trainer,
       phone: data.phone,
-      birthdate: new Date().toISOString().slice(0, 10), //wstawiam jakąkolwiek
+      birthdate: new Date().toISOString().slice(0, 10), //wstawiam cokolwiek
       language: 0,
       auto_update_lang: false
     };
@@ -90,10 +84,10 @@ const Register: FC = () => {
     <CSafeAreaView >
       <Image style={styles.image} source={require('./../../assets/images/Background_img.png')} alt={"backgroundImg"} />
       <View style={styles.content}>
-        <NavComponent goBack={goBack} />
+        <NavComponent />
         <KeyboardAvoidingView behavior='padding'>
           <View style={styles.card}>
-            <Banner />
+            {currentScreen < 5 && <Banner />}
             {currentScreen === 1 && <NamePage nameError={nameError} control={control} />}
             {currentScreen === 2 && <PhonePage phoneError={phoneError} control={control} />}
             {currentScreen === 3 && <EmailPage emailError={emailError} control={control} />}
@@ -107,7 +101,8 @@ const Register: FC = () => {
                   <TouchableOpacity style={styles.option}
                     onPress={handleSubmit((data) => onSubmit({ ...data, is_trainer: true }))}>
                     <View style={styles.optionImage}>
-                      {/* <SvgXml xml={trainerXml} height='110%' width="100%" style={styles.typeSvg} /> */}
+                      <Image source={require('../../assets/images/trainerImg.png')}
+                        style={styles.typeSvg} alt={'trainerPicture'} />
                     </View>
                     <View style={styles.textContainer}>
                       <Text style={styles.title}>{texts.trainer}</Text>
@@ -117,7 +112,8 @@ const Register: FC = () => {
                   <TouchableOpacity style={styles.option}
                     onPress={handleSubmit((data) => onSubmit({ ...data, is_player: true }))}>
                     <View style={styles.optionImage}>
-                    {/* <SvgXml xml={playerXml} height='110%' width="100%" style={styles.typeSvg} /> */}
+                      <Image source={require('../../assets/images/playerImg.png')}
+                        style={styles.typeSvg} alt={'playerPicture'} />
                     </View>
                     <View style={styles.textContainer}>
                       <Text style={styles.title}>{texts.player}</Text>
@@ -127,7 +123,8 @@ const Register: FC = () => {
                   <TouchableOpacity style={styles.option}
                     onPress={handleSubmit((data) => onSubmit({ ...data, is_fan: true }))}>
                     <View style={styles.optionImage}>
-                    {/* <SvgXml xml={fanXml} height='110%' width="100%" style={styles.typeSvg} /> */}
+                      <Image source={require('../../assets/images/fanImg.png')}
+                        style={styles.typeSvg} alt={'fanPicture'} />
                     </View>
                     <View style={styles.textContainer}>
                       <Text style={styles.title}>{texts.fan}</Text>
@@ -136,7 +133,8 @@ const Register: FC = () => {
                   <TouchableOpacity style={styles.option}
                     onPress={handleSubmit((data) => onSubmit({ ...data, is_scout: true }))}>
                     <View style={styles.optionImage}>
-                    {/* <SvgXml xml={scoutXml} height='110%' width="100%" style={styles.typeSvg} /> */}
+                      <Image source={require('../../assets/images/scoutImg.png')}
+                        style={styles.typeSvg} alt={'scoutPicture'} />
                     </View>
                     <View style={styles.textContainer}>
                       <Text style={styles.title}>{texts.scout}</Text>
@@ -147,16 +145,20 @@ const Register: FC = () => {
                 </View>
               </View>}
             {currentScreen === 6 && <RegisteredConfirmationPage succesMsgId={succesMsgId} succesMsg={succesMsg} />}
-            {currentScreen < 5 && <>
-              <View style={styles.statusBar}>
-                <Text style={styles.counterText}>{texts.step}</Text>
-                <Text style={styles.counter}>{currentScreen}/{texts.pageCount}</Text>
-              </View>
-              <View style={styles.progressBarBack}>
-                <View style={{ height: '100%', position: 'absolute', width: `${currentScreen * 25}%`, backgroundColor: '#9386E9' }} />
-              </View>
-              <Button title={texts.next} onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })} />
-            </>}
+            {currentScreen < 5 &&
+              <>
+                <View style={styles.statusBar}>
+                  <Text style={styles.counterText}>{texts.step}</Text>
+                  <Text style={styles.counter}>{currentScreen}/{texts.pageCount}</Text>
+                </View>
+                <View style={styles.progressBarBack}>
+                  <View style={[styles.progressBarFront, { width: `${currentScreen * 25}%` }]} />
+                </View>
+                <TouchableOpacity style={styles.nextButton} onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })}>
+                  <Text style={styles.nextButtonText}>{texts.next}</Text>
+                </TouchableOpacity>
+              </>
+            }
           </View>
         </KeyboardAvoidingView>
       </View>

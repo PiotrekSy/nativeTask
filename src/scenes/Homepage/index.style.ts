@@ -17,7 +17,6 @@ export const styles = StyleSheet.create({
     },
     buttonsList: {
         width: '100%',
-        // borderWidth: 1,
         display: 'flex',
         alignItems: 'center'
     },

@@ -1,19 +1,27 @@
 import React from 'react';
+import { styles } from './RegisteredConfirmationPage.style';
 import { View, Text } from 'react-native';
 import { RegisteredConfirmationPageProps } from '../types/types'
 import { useNavigationBackAction } from '@hooks/useNavigationBack';
-// import NavComponent from "../NavComponent/NavComponent";
-
+import { SvgXml } from 'react-native-svg';
+import { arrowxml } from './../../../assets/images/Vector';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const RegisteredConfirmationPage = ({ succesMsgId, succesMsg }: RegisteredConfirmationPageProps) => {
 
-const goBack = useNavigationBackAction()
+    const goBack = useNavigationBackAction()
 
     return (
-        <View>
-            <Text>{succesMsg}</Text>
-            <Text>{succesMsgId}</Text>
-            {/* <NavComponent goBack={goBack} /> */}
+        <View style={styles.container}>
+            <Text style={styles.succesMsg}>Udało się!</Text>
+            <Text style={styles.serverMsg}>{succesMsg}</Text>
+            <Text style={styles.succesMsg}>Nadano numer ID uytkownika:</Text>
+            <Text style={styles.serverMsg}>{succesMsgId}</Text>
+            <TouchableOpacity onPress={goBack}>
+                <TouchableOpacity onPress={goBack} style={styles.backButton}>
+                    <SvgXml xml={arrowxml} width="15%" />
+                </TouchableOpacity>
+            </TouchableOpacity>
         </View>
     )
 }
