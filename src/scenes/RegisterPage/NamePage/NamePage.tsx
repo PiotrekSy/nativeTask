@@ -1,32 +1,28 @@
 import React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { texts } from './texts';
+import { styles } from './NamePage.styles';
 import { Controller } from 'react-hook-form';
+import { NamePageProps } from '../types/types';
+import { View, Text, TextInput, Button } from 'react-native';
+import { currentScreenHandler } from '../utils/utils';
 
-type NamePageProps = {
-    currentScreenHandler: () => void;
-    control: any;
-};
-
-const NamePage = ({ currentScreenHandler, control }: NamePageProps,) => {
+const NamePage = ({ currentScreen, setCurrentScreen, control, nameError }: NamePageProps,) => {
 
     return (
         <View>
-            <Text>Imię i nazwisko</Text>
+            <Text>{nameError}</Text>
+            <Text style={styles.red}>{texts.title}</Text>
             <Controller
                 control={control}
-                // rules={{ required: false }}
+                name="username"
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Imię:"
+                    <TextInput placeholder={texts.placeholder}
                         onBlur={onBlur}
                         onChangeText={onChange}
-                        value={value}
-                    />
-                )}
-                name="name" />
-            <Button title="Dalej" onPress={currentScreenHandler} />
-        </View>
-    )
-}
+                        value={value} />)} />
+            <Button title={texts.forwards}
+                onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })} />
+        </View>)
+};
 
 export default NamePage;

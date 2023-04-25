@@ -8,4 +8,5 @@ module.exports = {
   bracketSpacing: true,
   importOrder: ['<THIRD_PARTY_MODULES>', '^[./]'],
   importOrderSeparation: false,
+
 };

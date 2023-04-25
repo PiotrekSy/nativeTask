@@ -1,111 +1,56 @@
-import { useCreateUser, useDeleteUser, useModifyUser } from '@api/hooks/useUser';
-import EnvInfoView from '@components/AppVersion';
+import { texts } from './texts';
+import { styles } from './index.style';
+import React, { FC, memo } from 'react';
+import { Text, View, } from 'react-native';
+import { FlatList } from 'native-base';
+import BackgroundElement from './BackgroundElement';
 import CSafeAreaView from '@components/CSafeAreaView';
-import { useNavigation } from '@react-navigation/native';
-import { GenericNavigationProps } from '@routes/types';
-import { Button, Flex, Icon, ScrollView } from 'native-base';
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useCallback, FC, memo, useLayoutEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import ModdedButton from './Buttons/ModdedButton';
+import { listButtonsData, registerButton, loginButton } from './Buttons/buttonsData';
 
 const Home: FC = () => {
-  const [t] = useTranslation();
-  const navigation = useNavigation<GenericNavigationProps>();
 
   return (
-    <CSafeAreaView>
-      <ScrollView style={styles.fullPage}>
-        <View>
-          <Text style={styles.titleText}>
-            FC.app
-          </Text>
-          <Text >Witaj w football challenge!</Text>
+    <CSafeAreaView >
+      <BackgroundElement />
+      <View style={styles.buttonsBackground}>
+        <View style={styles.buttonsList}>
+          <Text style={styles.bannerText}>{texts.gotAcc}</Text>
+
+          <ModdedButton
+            id={loginButton.id}
+            title={loginButton.title}
+            mode={loginButton.mode}
+            icon={loginButton.icon}
+            navigateTo={loginButton.navigateTo} />
+          <Text style={styles.bannerText}>{texts.getRegistered}</Text>
+
+          <FlatList
+            contentContainerStyle={{ flexGrow: 1, margin: 'auto', alignItems: 'center' }}
+            style={styles.flatList}
+            data={listButtonsData}
+            renderItem={({ item }) =>
+              <ModdedButton
+                id={item.id}
+                title={item.title}
+                mode={item.mode}
+                icon={item.icon}
+                navigateTo={item.navigateTo} />}
+            keyExtractor={item => item.id} />
+
+          <ModdedButton
+            id={registerButton.id}
+            title={registerButton.title}
+            mode={registerButton.mode}
+            icon={registerButton.icon}
+            navigateTo={registerButton.navigateTo} />
         </View>
-        <View>
-          <Text >MASZ JUŻ KONTO?</Text>
-          <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <View style={styles.buttonText}>
-                <Text >
-                  {t('Homepage:loginIn')}
-                </Text>
-              </View>
-            </Flex>
-          </Button>
-          <Text >LUB ZAREJESTRUJ SIĘ</Text>
-          <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <View style={styles.buttonText}>
-                <Text >
-                  {t('Homepage:googleLogin')}
-                </Text>
-              </View>
-            </Flex>
-          </Button>
 
-          <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <Text >
-                {t('Homepage:facebookLogin')}
-              </Text>
-            </Flex>
-          </Button>
-
-          <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <Text >
-                {t('Homepage:appleLogin')}
-              </Text>
-            </Flex>
-          </Button>
-
-          <Button
-            onPress={() => navigation.navigate('Main', { screen: 'Register' })}
-            backgroundColor="SUN_FLOWER"
-            mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <Text >
-                {t('Homepage:emailSignUp')}
-              </Text>
-            </Flex>
-          </Button>
-          {/* <EnvInfoView /> */}
-        </View>
-      </ScrollView >
+      </View>
     </CSafeAreaView >
   );
 };
 
-const styles = StyleSheet.create({
-  fullPage: {
-    flex: 0.5,
-    flexGrow: 1,
-    padding: 15,
-  },
-  titleText: {
-    color: "red",
-    // fontFamily: "body",
-    // fontWeight: 700,
-    fontStyle: "normal",
-    // fontSize: "3xl",
-    paddingBottom: 20,
-    textAlign: "center",
-  },
-  buttonText: {
-    color: 'red',
-    // fontFamily: "body",
-    fontWeight: 900,
-    // fontStyle: "normal",
-    // fontSize: "3xl",
-    paddingBottom: 20,
-    textAlign: "center",
-  },
-})
+
 
 export default memo(Home);

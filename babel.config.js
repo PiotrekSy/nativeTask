@@ -11,7 +11,6 @@ module.exports = {
           '@assets': './src/assets',
           '@components': './src/components',
           '@hooks': './src/hooks',
-          '@i18n': './src/i18n',
           '@routes': './src/routes',
           '@scenes': './src/scenes',
           '@theme': './src/theme',

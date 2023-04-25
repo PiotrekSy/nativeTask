@@ -1,34 +1,27 @@
 import React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { texts } from './texts';
+import { styles } from './PasswordPages.styles';
 import { Controller } from 'react-hook-form';
+import { PasswordPageProps } from '../types/types';
+import { View, Text, TextInput, Button } from 'react-native';
+import { currentScreenHandler } from '../utils/utils';
 
-type PasswordPageProps = {
-    currentScreenHandler: () => void;
-    control: any;
-};
-
-
-const PasswordPage = ({ currentScreenHandler, control }: PasswordPageProps,) => {
+const PasswordPage = ({ currentScreen, setCurrentScreen, control, passwordError }: PasswordPageProps,) => {
 
     return (
         <View >
-            <Text>Password</Text>
+            <Text>{passwordError}</Text>
+            <Text style={styles.red}>{texts.title}</Text>
             <Controller
                 control={control}
-                rules={{
-                    maxLength: 100,
-                }}
+                name="password1"
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Podaj hasło"
+                    <TextInput placeholder={texts.placeholder}
                         onBlur={onBlur}
                         onChangeText={onChange}
-                        value={value}
-                    />
-                )}
-                name="password"
-            />
-            <Button title="Dalej" onPress={currentScreenHandler} />
+                        value={value} />)} />
+            <Button title={texts.forwards} onPress={() =>
+                currentScreenHandler({ currentScreen, setCurrentScreen })} />
         </View>
     )
 }

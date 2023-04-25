@@ -1,35 +1,28 @@
 import React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { texts } from './texts';
+import { styles } from './PhonePage.style';
 import { Controller } from 'react-hook-form';
+import { PhonePageProps } from '../types/types';
+import { View, Text, TextInput, Button } from 'react-native';
+import { currentScreenHandler } from '../utils/utils';
 
-type PhonePageProps = {
-    currentScreenHandler: () => void;
-    control: any;
-};
-
-const PhonePage = ({ currentScreenHandler, control }: PhonePageProps) => {
+const PhonePage = ({ currentScreen, setCurrentScreen, control, phoneError }: PhonePageProps) => {
 
     return (
         <View>
-            <Text>Telefon</Text>
+            <Text>{phoneError}</Text>
+            <Text style={styles.text}>{texts.title}</Text>
             <Controller
+                name="phone"
                 control={control}
-                rules={{
-                    maxLength: 100,
-                }}
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        placeholder="Wpisz swój numer telefonu"
+                    <TextInput placeholder={texts.placeholder}
                         onBlur={onBlur}
                         onChangeText={onChange}
-                        value={value}
-                    />
-                )}
-                name="phone"
-            />
-            <Button title="Dalej" onPress={currentScreenHandler} />
-        </View>
-    )
+                        value={value} />)} />
+            <Button title={texts.forwards} onPress={() =>
+                currentScreenHandler({ currentScreen, setCurrentScreen })} />
+        </View>)
 }
 
 export default PhonePage;
