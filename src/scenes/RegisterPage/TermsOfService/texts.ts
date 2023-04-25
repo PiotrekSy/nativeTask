@@ -1,5 +1,5 @@
 
 export const texts = {
-    accInfo: 'Wybierz rodzaj swojego konta. W późniejszym etapie będzie moliwość zmiany lub dodania innych typów konta.',
-    tos: 'Terms of use',
+    accInfo: 'Tworząc konto zgadzasz się na warunki',
+    tos: 'Regulaminu i Polityki Prywatności',
 }

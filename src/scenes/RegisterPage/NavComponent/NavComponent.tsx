@@ -1,18 +1,27 @@
 import React from 'react';
-import { texts } from './texts';
 import { styles } from './NavComponent.style';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { NavProps } from '../types/types'
+import { View, TouchableOpacity } from 'react-native';
+import { SvgXml } from 'react-native-svg';
+import { xml } from './../../../assets/images/LogoSmall';
+import { arrowxml } from './../../../assets/images/Vector';
+import { useNavigationBackAction } from '@hooks/useNavigationBack';
+import { BackArrowPropTypes } from '../types/types'
 
-const NavComponent = ({ goBack }: NavProps) => {
+const NavComponent = ({ currentScreen, setCurrentScreen }: BackArrowPropTypes) => {
 
-    return (
-        <View>
-            <TouchableOpacity onPress={goBack} >
-                <Text style={styles.navElement}>{texts.back}</Text >
+    const goBack = useNavigationBackAction();
+    const navigateBackHandler = () => {
+        setCurrentScreen(currentScreen - 1)
+    }
+
+    return (<>
+        <View style={styles.nav}>
+            <SvgXml xml={xml} width="100%" />
+            <TouchableOpacity onPress={currentScreen === 1 ? goBack : navigateBackHandler} style={styles.backButton} >
+                <SvgXml xml={arrowxml} width="100%" />
             </TouchableOpacity>
-            <Text>FC APP</Text>
         </View>
+    </>
     )
 }
 

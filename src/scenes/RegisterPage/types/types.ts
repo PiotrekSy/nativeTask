@@ -1,3 +1,5 @@
+import React, { Dispatch } from "react";
+
 export type FormPostedData = {
   "username": string,
   "email": string,
@@ -16,31 +18,23 @@ export type FormPostedData = {
 };
 
 export type PhonePageProps = {
-  currentScreen: number,
-  setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
   control: any;
   phoneError: string;
 };
 
 export type NamePageProps = {
-  currentScreen: number,
-  setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
   control: any;
   nameError: string;
 };
 
 export type EmailPageProps = {
-  currentScreen: number,
-  setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
   control: any;
-  emailError: string
+  emailError: string;
 };
 
 export type PasswordPageProps = {
-  currentScreen: number,
-  setCurrentScreen: React.Dispatch<React.SetStateAction<number>>,
   control: any;
-  passwordError: string
+  passwordError: string;
 };
 
 export type NavProps = {
@@ -50,4 +44,9 @@ export type NavProps = {
 export type RegisteredConfirmationPageProps = {
   succesMsgId: string,
   succesMsg: string,
+};
+
+export type BackArrowPropTypes = {
+  currentScreen: number,
+  setCurrentScreen: Dispatch<React.SetStateAction<number>>;
 };

@@ -14,15 +14,16 @@ const Home: FC = () => {
     <CSafeAreaView >
       <BackgroundElement />
       <View style={styles.buttonsBackground}>
+
         <View style={styles.buttonsList}>
           <Text style={styles.bannerText}>{texts.gotAcc}</Text>
-
           <ModdedButton
             id={loginButton.id}
             title={loginButton.title}
             mode={loginButton.mode}
             icon={loginButton.icon}
-            navigateTo={loginButton.navigateTo} />
+            navigateTo={loginButton.navigateTo}
+          />
           <Text style={styles.bannerText}>{texts.getRegistered}</Text>
 
           <FlatList
@@ -36,21 +37,21 @@ const Home: FC = () => {
                 mode={item.mode}
                 icon={item.icon}
                 navigateTo={item.navigateTo} />}
-            keyExtractor={item => item.id} />
+            keyExtractor={item => item.id}
+          />
 
           <ModdedButton
             id={registerButton.id}
             title={registerButton.title}
             mode={registerButton.mode}
             icon={registerButton.icon}
-            navigateTo={registerButton.navigateTo} />
+            navigateTo={registerButton.navigateTo}
+          />
         </View>
-
       </View>
     </CSafeAreaView >
   );
 };
-
 
 
 export default memo(Home);

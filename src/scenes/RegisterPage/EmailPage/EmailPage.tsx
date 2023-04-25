@@ -3,25 +3,29 @@ import { texts } from './texts';
 import { styles } from './EmailPage.styles';
 import { Controller } from 'react-hook-form';
 import { EmailPageProps } from '../types/types';
-import { currentScreenHandler } from '../utils/utils';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const EmailPage = ({ currentScreen, setCurrentScreen, control, emailError }: EmailPageProps,) => {
+const EmailPage = ({ control, emailError }: EmailPageProps,) => {
 
     return (
-        <View>
-            <Text>{emailError}</Text>
-            <Text style={styles.text}>{texts.title}</Text>
+        <View style={styles.form}>
+            <Text style={styles.error}>{emailError}</Text>
+            <Text style={styles.title}>{texts.title}</Text>
             <Controller
                 name="email"
                 control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput placeholder={texts.placeholder}
+                render={({ field: { onChange, onBlur, value } }) => (<>
+                    <Icon name="mail" size={24} color="#777" style={styles.icon} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder={texts.placeholder}
+                        placeholderTextColor={'rgba(237, 237, 237, 0.7)'}
                         onBlur={onBlur}
                         onChangeText={onChange}
-                        value={value} />)} />
-            <Button title={texts.forwards} onPress={() =>
-                currentScreenHandler({ currentScreen, setCurrentScreen })} />
+                        value={value} />
+                </>)} />
+
         </View>
     )
 }
