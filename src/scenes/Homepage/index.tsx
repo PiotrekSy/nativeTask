@@ -1,75 +1,46 @@
 import { texts } from './texts';
 import { styles } from './index.style';
 import React, { FC, memo } from 'react';
-import { Text, View } from 'react-native';
-import { GenericNavigationProps } from '@routes/types';
-import { useNavigation } from '@react-navigation/native';
-import { Button, Flex, Icon, ScrollView, Image } from 'native-base';
+import { Text, View, } from 'react-native';
+import { ScrollView, FlatList } from 'native-base';
+import BackgroundElement from './BackgroundElement';
 import CSafeAreaView from '@components/CSafeAreaView';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import ModdedButton from './Buttons/ModdedButton';
+import { listButtonsData, registerButton, loginButton } from './Buttons/buttonsData';
 
 const Home: FC = () => {
-
-  const navigation = useNavigation<GenericNavigationProps>();
 
   return (
     <CSafeAreaView>
       <ScrollView style={styles.fullPage}>
-
-        <View>
-          <Text style={styles.titleText}>
-            FC.app
-          </Text>
-          <Text>Witaj w football challenge!</Text>
-        </View>
-
-        {/* //////////////////////////////////////////////////////////// */}
-
-        <View>
-
-          <Text>{texts.gotAcc}</Text>
-
-          <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <Text >Zaloguj się</Text>
-            </Flex>
-          </Button>
-
-          <Text>LUB ZAREJESTRUJ SIĘ</Text>
-
-          <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <Text >Uzyj konta Google</Text>
-            </Flex>
-          </Button>
-
-          <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <Text >Uzyj konta Facebook</Text>
-            </Flex>
-          </Button>
-
-          <Button onPress={() => navigation.navigate('Main', { screen: 'Login' })} backgroundColor="SUN_FLOWER" mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <Text >Uzyj konta Apple</Text>
-            </Flex>
-          </Button>
-
-          {/* //////////////////////////////////////////////////////////// */}
-
-          <Button onPress={() => navigation.navigate('Main', { screen: 'Register' })} backgroundColor="SUN_FLOWER" mb="5px">
-            <Flex flexDirection="row" alignItems="center">
-              <Icon as={EvilIcons} name="arrow-right" color="WHITE" marginRight={2} fontSize={20} />
-              <Text >Zarejestruj się E-mailem</Text>
-            </Flex>
-          </Button>
-
-          {/* //////////////////////////////////////////////////////////// */}
-
+        <BackgroundElement />
+        <View style={styles.buttonsBackground}>
+          <View style={styles.buttonsList}>
+            <Text style={styles.bannerText}>{texts.gotAcc}</Text>
+            <ModdedButton
+              id={loginButton.id}
+              title={loginButton.title}
+              mode={loginButton.mode}
+              icon={loginButton.icon}
+              navigateTo={loginButton.navigateTo} />
+            <Text style={styles.bannerText}>{texts.getRegistered}</Text>
+            <FlatList
+              data={listButtonsData}
+              renderItem={({ item }) =>
+                <ModdedButton
+                  id={item.id}
+                  title={item.title}
+                  mode={item.mode}
+                  icon={item.icon}
+                  navigateTo={item.navigateTo} />}
+              keyExtractor={item => item.id} />
+            <ModdedButton
+              id={registerButton.id}
+              title={registerButton.title}
+              mode={registerButton.mode}
+              icon={registerButton.icon}
+              navigateTo={registerButton.navigateTo} />
+          </View>
         </View>
       </ScrollView >
     </CSafeAreaView >

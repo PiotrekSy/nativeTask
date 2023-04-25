@@ -2,16 +2,26 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     fullPage: {
-        flex: 0.5,
-        flexGrow: 1,
-        padding: 15,
+        flex: 1,
+        backgroundColor: '#241F44',
     },
-    titleText: {
-        color: "red",
-
-        fontStyle: "normal",
-        paddingBottom: 20,
-        textAlign: "center",
+    buttonsBackground: {
+        height: '110%',
+        width: '100%',
+        shadowColor: '#595281',
+        shadowTopOffset: { width: 0, height: 3 },
+        shadowOpacity: 1,
+        shadowRadius: 3,
+        elevation: 3,
+        zIndex: 2,
+        borderRadius: 50,
+        backgroundColor: '#241F44',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonsList: {
+        width: '95%',
+        alignItems: "center",
     },
     buttonText: {
         color: 'red',
@@ -19,7 +29,10 @@ export const styles = StyleSheet.create({
         paddingBottom: 20,
         textAlign: "center",
     },
-    text: {
-        color: 'red',
-    },
+    bannerText: {
+        fontSize: 11,
+        color: '#EDEDED',
+        margin: 5,
+        fontWeight: '500',
+    }
 });

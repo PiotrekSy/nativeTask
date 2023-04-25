@@ -43,7 +43,7 @@ const Register: FC = () => {
       is_player: data?.is_player,
       is_trainer: data?.is_trainer,
       phone: data.phone,
-      birthdate: new Date().toISOString().slice(0, 10),
+      birthdate: new Date().toISOString().slice(0, 10), //wstawiam jakąkolwiek
       language: 0,
       auto_update_lang: false
     };
@@ -71,7 +71,8 @@ const Register: FC = () => {
         reset(defaultObject), setCurrentScreen(6)) : null;
       console.log("Response Body -> " + JSON.stringify(jsonResponse, null, 5));
       return jsonResponse;
-    } catch (error) {
+    }
+    catch (error) {
       console.error("Error registering user:", error);
       throw error;
     }
