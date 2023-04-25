@@ -1,13 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    fullPage: {
-        flex: 1,
-        backgroundColor: '#241F44',
-    },
     buttonsBackground: {
-        height: '110%',
-        width: '100%',
+        width: "100%",
+        height: '50%',
         shadowColor: '#595281',
         shadowTopOffset: { width: 0, height: 3 },
         shadowOpacity: 1,
@@ -17,14 +13,19 @@ export const styles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: '#241F44',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'flex-start',
     },
     buttonsList: {
-        width: '95%',
-        alignItems: "center",
+        width: '100%',
+        borderWidth: 1,
+        display: 'flex',
+        alignItems: 'center'
+    },
+    flatList: {
+        width: '100%',
     },
     buttonText: {
-        color: 'red',
+        width: '100%',
         fontWeight: 900,
         paddingBottom: 20,
         textAlign: "center",
@@ -32,7 +33,7 @@ export const styles = StyleSheet.create({
     bannerText: {
         fontSize: 11,
         color: '#EDEDED',
-        margin: 5,
+        margin: 20,
         fontWeight: '500',
     }
 });

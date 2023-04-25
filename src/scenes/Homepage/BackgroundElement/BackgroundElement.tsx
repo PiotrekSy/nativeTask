@@ -1,17 +1,18 @@
 import React from 'react';
-import { texts } from './texts';
 import { View, Text, Image } from 'native-base';
 import { styles } from './BackgroundElement.style';
-import { Svg, Path } from 'react-native-svg';
-
+import { SvgXml } from 'react-native-svg';
+import { xml } from './../../../assets/images/Header_text';
 
 const BackgroundElement = () => {
+
+    const uri = "../../../assets/images/Header_text.svg";
+
     return (
         <View style={styles.background} >
-            <Image style={styles.image} source={require('../../../assets/images/Background_img.png')} />
+            <Image style={styles.image} source={require('../../../assets/images/Background_img.png')} alt={'background'} />
             <View style={styles.banner} >
-                <></>
-                <Text style={styles.greeting}>{texts.greeting}</Text>
+                <SvgXml xml={xml} />
             </View>
         </View>
     )

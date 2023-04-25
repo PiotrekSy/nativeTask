@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         minHeight: "55%",
         margin: 0,
         padding: 0,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
     greeting: {
@@ -24,6 +24,9 @@ export const styles = StyleSheet.create({
         position: "absolute",
         zIndex: -1,
     },
+    banner: {
+        marginTop: 70
+    }
 });
 
 
