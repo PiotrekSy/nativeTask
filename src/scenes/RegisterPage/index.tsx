@@ -1,28 +1,26 @@
 import { texts } from './texts';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState } from 'react';
 import { styles } from './index.styles';
 import { SvgXml } from 'react-native-svg';
 import { useForm } from "react-hook-form";
 import { defaultObject } from './utils/utils';
 import { FormPostedData } from './types/types';
-import { currentScreenHandler } from './utils/utils';
 import { Image, KeyboardAvoidingView, } from 'native-base';
-import { Text, View, TouchableOpacity, Keyboard, KeyboardEvent } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { backgroundLogoXml } from './../../assets/images/BackgroundLogo';
 import * as React from 'react';
-import Banner from './Banner/Banner';
-import NamePage from './NamePage/NamePage';
-import EmailPage from './EmailPage/EmailPage';
-import PhonePage from './PhonePage/PhonePage';
+import Banner from './Banner';
+import NamePage from './NamePage';
+import StatusBar from './StatusBar';
+import EmailPage from './EmailPage';
+import PhonePage from './PhonePage';
+import PasswordPage from './PasswordPage';
+import NavComponent from './NavComponent';
+import TermsOfService from './TermsOfService';
 import CSafeAreaView from '@components/CSafeAreaView';
-import PasswordPage from './PasswordPage/PasswordPage';
-import NavComponent from './NavComponent/NavComponent';
-import TermsOfService from './TermsOfService/TermsOfService';
-import RegisteredConfirmationPage from './RegisteredConfirmationPage/RegisteredConfirmationPage';
+import RegisteredConfirmationPage from './RegisteredConfirmationPage';
 
 const Register: FC = () => {
-
-
   const [succesMsg, setSuccesMsg] = useState<string>('');
   const [nameError, setNameError] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
@@ -50,7 +48,6 @@ const Register: FC = () => {
       language: 0,
       auto_update_lang: false
     };
-
     try {
       const url = "https://api.dev.footballchallengeapp.com/auth/registration/";
       const response = await fetch(url, {
@@ -146,18 +143,7 @@ const Register: FC = () => {
                 </View>
               </View>}
             {currentScreen === 6 && <RegisteredConfirmationPage succesMsgId={succesMsgId} succesMsg={succesMsg} />}
-            {currentScreen < 5 && <>
-              <View style={styles.statusBar}>
-                <Text style={styles.counterText}>{texts.step}</Text>
-                <Text style={styles.counter}>{currentScreen}/{texts.pageCount}</Text>
-              </View>
-              <View style={styles.progressBarBack}>
-                <View style={[styles.progressBarFront, { width: `${currentScreen * 25}%` }]} />
-              </View>
-              <TouchableOpacity style={styles.nextButton} onPress={() => currentScreenHandler({ currentScreen, setCurrentScreen })}>
-                <Text style={styles.nextButtonText}>{texts.next}</Text>
-              </TouchableOpacity>
-            </>}
+            {currentScreen < 5 && <StatusBar currentScreen={currentScreen} setCurrentScreen={setCurrentScreen} />}
           </View>
         </KeyboardAvoidingView>
       </View>
